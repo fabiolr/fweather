@@ -1,0 +1,41 @@
+[{
+    "caseID": 4,
+    "bigMsg": "Turn on the A/C before you have sex",
+    "smallMsg": "Once you are on out there, there is no turning back"
+},{
+    "caseID": 4,
+    "bigMsg": "No way you won't sweat today",
+    "smallMsg": "Double up on the deodorant"
+},{
+    "caseID": 1,
+    "bigMsg": "Don't forget your poles",
+    "smallMsg": "Time to go skiing"
+},{
+    "caseID": 2,
+    "bigMsg": "Locals are reaching for their coats",
+    "smallMsg": "foreigners are calling it hell"
+},{
+    "caseID": 2,
+    "bigMsg": "A chilly day for $city",
+    "smallMsg": "don't sweat"
+},{
+    "caseID": 3,
+    "bigMsg": "No way you won't sweat today",
+    "smallMsg": "Double up on the deodorant"
+},{
+    "caseID": 3,
+    "bigMsg": "It's fucking hot",
+    "smallMsg": "period"
+},{
+    "caseID": 1,
+    "bigMsg": "You might want to stay in your igloo today",
+    "smallMsg": "it's definetly warmer"
+},{
+    "caseID": 5,
+    "bigMsg": "Call in sick",
+    "smallMsg": "it's Hell on earth"
+},{
+    "caseID": 5,
+    "bigMsg": "It's not a hot day,",
+    "smallMsg": "it's just another atomic bomb"
+}]

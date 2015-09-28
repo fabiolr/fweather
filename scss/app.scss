@@ -1,6 +1,31 @@
 @import "settings";
 @import "foundation";
 
+.message-block {
+		background: red;
+		min-height: 400px;
+}
+
+.funny-message {
+		padding-top: 20px;
+		line-height: 97%;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 700;
+		font-size: 4em;
+
+}
+
+.funny-sub-message {
+		line-height: 97%;
+		color: #545454;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 400;
+		font-size: 1em;
+
+}
+
+
+
 // Or selectively include components
 // @import
 //   "foundation/components/accordion",
