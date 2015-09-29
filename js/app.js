@@ -1,11 +1,19 @@
 // Foundation JavaScript
 // Documentation can be found at: http://foundation.zurb.com/docs
 $(document).foundation();
-
-var currTemp = 80 // To be fed by API
+var currTemp = 86 // To be fed by API
 var normalTemp = 82; // To be fed by normal data downloaded and parsed for location
 var oMessages;
 var chosenMessage;
+var zip;
+
+// Chamges ZIP on click of change button
+
+$("#ChangeZip").click(function(){
+	
+    	zip = $('#zip').val();
+
+});
 
  jQuery.getJSON("data/funny.json", function(data) {
 	oMessages = data;
@@ -28,6 +36,8 @@ var chosenMessage;
   	return aPossibleMessages[int(random(aPossibleMessages.length))];
 
   }
+
+
 
 ///////////////////////////////////////////////////////
 ///  LOGIC TO DECIDE WHAT TO SAY ABOUT CURRENT TEMP ///

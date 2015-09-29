@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fucking Weather</title>
     <link rel="stylesheet" href="stylesheets/app.css" />
-    <!--    <script src="bower_components/modernizr/modernizr.js"></script> -->
+    <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->
+    <script language="javascript" type="text/javascript" src="bower_components/p5.js/lib/p5.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="bower_components/p5.js/"></script>
     <script language="javascript" type="text/javascript"  src="js/data.js"></script>
+    <script language="javascript" type="text/javascript"  src="js/sketch.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:800,400,700' rel='stylesheet' type='text/css'>  
 
   </head>
@@ -28,17 +29,26 @@
     <ul class="right">
       <li class="active"><a href="#">Right Button Active</a></li>
       <li class="has-dropdown">
-        <a href="#">Right Button Dropdown</a>
+        <a href="#">More</a>
         <ul class="dropdown">
-          <li><a href="#">First link in dropdown</a></li>
-          <li class="active"><a href="#">Active link in dropdown</a></li>
+          <li><a href="#">Setup </a></li>
+          <li class="active"><a href="#">View in C ˚</a></li>
         </ul>
       </li>
     </ul>
 
     <!-- Left Nav Section -->
     <ul class="left">
-      <li><a href="#">Left Nav Button</a></li>
+<li class="has-form">
+  <div class="row collapse">
+    <div class="large-8 small-9 columns">
+      <input id="zip" type="text" placeholder="ZIP Code">
+    </div>
+    <div class="large-4 small-3 columns">
+      <a href="#" id="ChangeZip" class="alert button expand">Change</a>
+    </div>
+  </div>
+</li>
     </ul>
   </section>
 </nav>
@@ -46,8 +56,8 @@
 <div class="row">
 
     <div class="small-12 large-6 columns message-block">
-      <p class="funny-message">Check the A/C before you have sex.</p>
-      <p class="funny-sub-message">There is no turning backwards, really.</p>
+      <p class="funny-message" id="bigMsg"></p>
+      <p class="funny-sub-message" id="smallMsg"></p>
     </div>
 
             
@@ -67,6 +77,8 @@
 </div>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
+      <!--  <script src="bower_components/foundation/js/foundation.topbar.js"></script> -->
+
     <script src="js/app.js"></script>
 
   </body>
