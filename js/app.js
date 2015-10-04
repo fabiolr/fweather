@@ -1,7 +1,7 @@
 // Foundation JavaScript
 // Documentation can be found at: http://foundation.zurb.com/docs
 $(document).foundation();
-var currTemp = 60 // To be fed by API
+var currTemp = 82	 // To be fed by API
 var normalTemp = 82; // To be fed by normal data downloaded and parsed for location
 var oMessages;
 var chosenMessage;
@@ -57,50 +57,41 @@ function ZipChanged() {
 }
 
 
-
-
-
-///////////////////////////////////////////////////////
-///  LOGIC TO DECIDE WHAT TO SAY ABOUT CURRENT TEMP ///
-///////////////////////////////////////////////////////
-
+/////////////////////////////////
+///  MESSAGE SELECTION  LOGIC ///
+/////////////////////////////////
 
 function DoMsgLogic() {
 
 	setTimeout(function(){
-
 
 		if (currTemp >= (1.1 * normalTemp)) {  
 
 			// Case 5 - for really fucking hot
 			chosenMessage = PickOneMessage(5);
 			console.log("Case5");
-			$("#MessageBlock").css( "color", "red" );
-
+			$(".message-block").css( "background", "red" );  
 			
 		} else if (currTemp < .9 * normalTemp) {
 
 			// Case 1 - for really fucking cold 
 			chosenMessage = PickOneMessage(1);
 			console.log("Case1");
-			$("#MessageBlock").css( "color", "blue" );  // KIM-> Why does not work?
-
+			$(".message-block").css( "background", "blue" );  
 
 		} else if (currTemp >= normalTemp) { 
 
 			// Case 3 - for hot as usual
 			chosenMessage = PickOneMessage(3);
 			console.log("Case3");
-			$("#MessageBlock").css( "color", "red" );  
-
+			$(".message-block").css( "background", "red" );  
 
 		} else if (currTemp < normalTemp) {
 
 			// Case 2 - for cold as usual
 			chosenMessage = PickOneMessage(2);
 			console.log("Case2");
-			$("#MessageBlock").css( "color", "blue" );
-
+			$(".message-block").css( "background", "blue" );  
 
 		}
 
@@ -111,9 +102,9 @@ function DoMsgLogic() {
 
 }
 
-///////////////////////////////////////////////////////
-
-
+/////////////////////////////////
+///  ICON   SELECTION   LOGIC ///
+/////////////////////////////////
 
 
 
