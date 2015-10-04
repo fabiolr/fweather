@@ -45,11 +45,8 @@ function ZipChanged() {
 
 	// Call the API to get new Data for new Zip.
 
-
-
 	// Load the new data into the variables
-
-
+	
 	// do the message logic again
 
 	DoMsgLogic();
@@ -98,7 +95,7 @@ function DoMsgLogic() {
 			$("#bigMsg").html(chosenMessage.bigMsg);
 			$("#smallMsg").html(chosenMessage.smallMsg);
 
-	}, 50);
+	}, 100);
 
 }
 
