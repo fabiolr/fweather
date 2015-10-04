@@ -9441,30 +9441,36 @@ th.hide-for-touch {
 }
 /* line 4, ../scss/app.scss */
 .message-block {
-  min-height: 300px;
-  max-width: 700px;
+  min-height: 250px;
 }
 
 /* line 10, ../scss/app.scss */
-.gauge {
-  width: 300px;
-  height: 300px;
+.weather-col {
+  vertical-align: bottom;
 }
 
 /* line 17, ../scss/app.scss */
+figure {
+  max-width: 180px;
+  min-width: 120px;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+/* line 26, ../scss/app.scss */
 .funny-message {
   padding-top: 20px;
   line-height: 97%;
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
-  font-size: 4em;
+  font-size: 7vh;
 }
 
-/* line 26, ../scss/app.scss */
+/* line 35, ../scss/app.scss */
 .funny-sub-message {
   line-height: 97%;
   color: #545454;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 1.3em;
+  font-size: 4vh;
 }
