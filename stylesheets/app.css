@@ -9460,13 +9460,14 @@ figure {
 /* line 26, ../scss/app.scss */
 .funny-message {
   padding-top: 20px;
+  min-height: 300px;
   line-height: 97%;
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 7vh;
 }
 
-/* line 35, ../scss/app.scss */
+/* line 36, ../scss/app.scss */
 .funny-sub-message {
   line-height: 97%;
   color: #545454;
