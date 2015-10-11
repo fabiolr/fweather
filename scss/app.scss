@@ -6,13 +6,23 @@
 
 }
 
-
 .weather-col {
 
 		vertical-align: bottom;
-	
-
 }
+
+
+.grow { 
+
+	transition: all .2s ease-in-out; 
+}
+
+
+.grow:hover {
+
+	transform: scale(1.03); 
+}
+
 
 figure {
 
@@ -24,13 +34,17 @@ figure {
 
 
 .funny-message {
-		padding-top: 20px;
-		min-height: 300px;
-		line-height: 97%;
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 700;
 		font-size: 7vh; 
+		line-height: 97%;
 
+
+}
+
+.funny-message-w {
+		padding-top: 20px;
+		min-height: 300px;
 }
 
 .funny-sub-message {

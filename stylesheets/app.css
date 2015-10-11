@@ -9444,12 +9444,22 @@ th.hide-for-touch {
   min-height: 250px;
 }
 
-/* line 10, ../scss/app.scss */
+/* line 9, ../scss/app.scss */
 .weather-col {
   vertical-align: bottom;
 }
 
-/* line 17, ../scss/app.scss */
+/* line 15, ../scss/app.scss */
+.grow {
+  transition: all .2s ease-in-out;
+}
+
+/* line 21, ../scss/app.scss */
+.grow:hover {
+  transform: scale(1.03);
+}
+
+/* line 27, ../scss/app.scss */
 figure {
   max-width: 180px;
   min-width: 120px;
@@ -9457,17 +9467,21 @@ figure {
   margin-left: 0px;
 }
 
-/* line 26, ../scss/app.scss */
+/* line 36, ../scss/app.scss */
 .funny-message {
-  padding-top: 20px;
-  min-height: 300px;
-  line-height: 97%;
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 7vh;
+  line-height: 97%;
 }
 
-/* line 36, ../scss/app.scss */
+/* line 45, ../scss/app.scss */
+.funny-message-w {
+  padding-top: 20px;
+  min-height: 300px;
+}
+
+/* line 50, ../scss/app.scss */
 .funny-sub-message {
   line-height: 97%;
   color: #545454;
