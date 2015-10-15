@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="stylesheets/app.css" />
     <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->
     <script language="javascript" type="text/javascript" src="bower_components/p5.js/lib/p5.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="bower_components/p5.js/lib/addons/p5.dom.js"></script>
+    <script language="javascript" type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <script language="javascript" type="text/javascript"  src="js/data.js"></script>
     <script language="javascript" type="text/javascript"  src="js/sketch.js"></script>
     <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:800,400,700' rel='stylesheet' type='text/css'>   -->
@@ -27,7 +29,7 @@
   <section class="top-bar-section">
     <!-- Right Nav Section -->
     <ul class="right">
-      <li class="inactive" id="CurrentCity"><a href="#">Miami, FL</a></li>
+      <li class="inactive"><a id="CurrentCity" href="#"></a></li>
       <li class="has-dropdown">
         <a href="#">More</a>
         <ul class="dropdown">
@@ -65,22 +67,21 @@
 
     <div class="small-12 medium-12 large-6 columns">
 
-      <div class="small-6 medium-6 large-12 columns weather-col">
+      <div id="gauge" class="small-6 medium-6 large-12 columns weather-col">
       
-        <figure><img src="img/gauge_.svg"></img></figure>
-
+      <!--Gauge Canvas goes here -->
+      
       </div>
 
-      <div class="small-6 medium-6 large-12 columns weather-col">
+      <div id="condition" class="small-6 medium-6 large-12 columns weather-col">
 
-        <figure><img class="weather_icon" src="img/weather_sunny.svg"></img></figure>
+      <!--Weather icon Canvas goes here -->
 
       </div>
 
     </div>
 </div>
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
       <!--  <script src="bower_components/foundation/js/foundation.topbar.js"></script> -->
 

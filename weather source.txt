@@ -1,0 +1,10 @@
+weather source
+
+0ba8cbb8cbed893d59cb
+https://api.weathersource.com/v1/{api_key}/resource.json
+https://api.weathersource.com/v1/0ba8cbb8cbed893d59cb/resource.json
+
+
+http://api.wunderground.com/api/Your_Key/planner_07010731/q/CA/San_Francisco.json
+cb061a9fcab50867
+http://api.wunderground.com/api/cb061a9fcab50867/planner_10011030/q/33133.json

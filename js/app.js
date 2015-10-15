@@ -1,24 +1,46 @@
 // Foundation JavaScript
 // Documentation can be found at: http://foundation.zurb.com/docs
 $(document).foundation();
-var currTemp = Math.random() * (70) + 30;	 // To be fed by API
-var normalTemp = 82; // To be fed by normal data downloaded and parsed for location
+var currTemp;
+var normalTemp = 72; // To be fed by normal data downloaded and parsed for location
 var oMessages;
+var oWeather;
+var oHistory;
 var chosenMessage;
 var zip;
+var d = new Date();
 
-// Chamges ZIP on click of change button
+// checks for zip in cookies
+
+  $( document ).ready(function() {
+    $( "p" ).text( "The DOM is now loaded and can be manipulated." );
+  });
+  
+zip = document.cookie.replace(/(?:(?:^|.*;\s*)zip\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+
+// Changes ZIP on click of change button, sets cookie and calls to change stuff
 
 $("#ChangeZip").click(function(){
 
     	zip = $('#zip').val();
-    	ZipChanged();
+ 		document.cookie = "zip="+zip;
+    	GetWeather();
 
 });
 
- jQuery.getJSON("data/funny.json", function(data) {
-	oMessages = data;
-},DoMsgLogic());
+// Gets Funny messages
+
+function LoadMessages() {
+
+
+$.getJSON("data/funny.json")
+
+	.done(function(data) {
+		 oMessages = data;
+		 DoMsgLogic();
+	});
+}
 
 // This function will select only messages with the desired case ID and return an awaaay with all.
 
@@ -35,23 +57,10 @@ $("#ChangeZip").click(function(){
   function PickOneMessage(id) {
 
   	aPossibleMessages = getMessages(id,oMessages);
-  	return aPossibleMessages[int(random(aPossibleMessages.length))];
+  	return aPossibleMessages[gaugeCanvas.int(gaugeCanvas.random(aPossibleMessages.length))];
 
   }
 
-// function to be called when user changes/selectsa a zip. reloads everything 
-
-function ZipChanged() {
-
-	// Call the API to get new Data for new Zip.
-
-	// Load the new data into the variables
-	
-	// do the message logic again
-
-	DoMsgLogic();
-
-}
 
 
 /////////////////////////////////
@@ -105,6 +114,57 @@ function DoMsgLogic() {
 
 
 
+/////////////////////////////////
+///  HISTORICAL CONTEXT LOGIC ///
+/////////////////////////////////
 
+var  m = d.getMonth() + 1;
+
+
+function GetHistory() {
+
+
+$.getJSON("http://api.wunderground.com/api/cb061a9fcab50867/planner_"+m+"01"+m+"30/q/"+zip+".json")
+
+	.done(function(data) {
+		 oHistory = data;
+		 // example: oHistory.trip.temp_high.max.F 
+		 DoGauge();
+	});
+}
+
+function DoGauge() {
+
+		// contruct gauge based on oHistory data.
+
+
+}
+
+/////////////////////////////////
+///  API CALLS AND HANDLING   ///
+/////////////////////////////////
+
+function GetWeather() {
+
+
+$.getJSON("http://api.openweathermap.org/data/2.5/weather?zip="+zip+",us&APPID=60f3da918baca596bc5457e165aa3cd3&units=imperial")
+	.done(function(data) {
+		 oWeather = data;
+		 DoWeatherLogic();
+		 DoMsgLogic();
+		 GetHistory();
+	});
+}
+
+
+function DoWeatherLogic() {
+
+	// get temperature and put into context
+
+	// update city name on gui
+	$("#CurrentCity").html(oWeather.name);
+	currTemp = oWeather.main.temp;
+	console.log(oWeather.name);
+}
 
 
