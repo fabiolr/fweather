@@ -1,5 +1,8 @@
 
 
+/// Controls the Gauge canvas  ///
+
+
 var oGauge = function( p ) {
 
   p.setup = function() {
@@ -10,11 +13,17 @@ var oGauge = function( p ) {
   };
 
   p.draw = function() {
-    p.background(0);
+    p.background(bgcolor);
     p.fill(255);
-    p.rect(10,10,10,10);
+    p.rect(10,10,100,10);
+    p.fill(0);
+    p.rect(10+currTemp,10,10,10);
   };
 };
+
+
+/// Controls the weather condition canvas  ///
+
 
 var oCondition = function( p ) {
 
@@ -26,25 +35,23 @@ var oCondition = function( p ) {
   };
 
   p.draw = function() {
-    p.background(0);
-    p.fill(255,0,0  );
-    p.rect(10,10,10,10);
+    p.background(bgcolor);
+    p.fill(255);
+    p.text(currTemp+"F in "+oWeather.name,10,10);
   };
 };
 
 
+// actually creates them' canvas
+
+function DoCanvases () {
+
 var gaugeCanvas = new p5(oGauge);
 var conditionCanvas = new p5(oCondition);
 
+}
 
-
-
-// var iconCanvas = new p5(sketch);
-
-
-
-
-
+  
 
 
 
