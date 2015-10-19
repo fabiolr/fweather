@@ -39,6 +39,12 @@ figure {
 		font-size: 7vh; 
 		line-height: 97%;
 
+.move-me {
+	
+		animation-name: move-in;
+   		animation-duration: 4s;
+}
+
 
 }
 
@@ -56,7 +62,13 @@ figure {
 
 }
 
-
+/* The animation code */
+@keyframes move-in {
+    0%   {margin-left: -400px;}
+    25%   {margin-left: 200px;}
+    50%   {margin-left: 100px;}
+    100%   {margin-left: 0px;}
+}
 
 // Or selectively include components
 // @import
