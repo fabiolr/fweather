@@ -9735,27 +9735,57 @@ th.hide-for-touch {
     display: table-cell !important;
   }
 }
-/* line 4, ../scss/app.scss */
-.message-block {
-  min-height: 250px;
+/* line 5, ../scss/app.scss */
+html {
+  height: 100%;
 }
 
-/* line 9, ../scss/app.scss */
+/* line 10, ../scss/app.scss */
+body {
+  display: none;
+  height: 100%;
+}
+
+/* line 19, ../scss/app.scss */
 .weather-col {
   vertical-align: bottom;
 }
 
-/* line 15, ../scss/app.scss */
+/* line 25, ../scss/app.scss */
 .grow {
   transition: all .2s ease-in-out;
 }
 
-/* line 21, ../scss/app.scss */
+/* line 31, ../scss/app.scss */
 .grow:hover {
   transform: scale(1.03);
 }
 
-/* line 27, ../scss/app.scss */
+/* line 37, ../scss/app.scss */
+a:visited {
+  color: "grey";
+}
+
+/* line 44, ../scss/app.scss */
+.status-settings {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
+  font-size: 2vh;
+  text-align: right;
+  color: "5b5b5b";
+}
+
+/* line 54, ../scss/app.scss */
+a:all {
+  color: "grey";
+}
+
+/* line 58, ../scss/app.scss */
+.messages {
+  height: 70%;
+}
+
+/* line 63, ../scss/app.scss */
 figure {
   max-width: 180px;
   min-width: 120px;
@@ -9763,46 +9793,36 @@ figure {
   margin-left: 0px;
 }
 
-/* line 36, ../scss/app.scss */
+/* line 72, ../scss/app.scss */
 .funny-message {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
-  font-size: 7vh;
+  font-size: 8vh;
   line-height: 97%;
 }
-/* line 42, ../scss/app.scss */
-.funny-message .move-me {
-  animation-name: move-in;
-  animation-duration: 4s;
-}
 
-/* line 51, ../scss/app.scss */
+/* line 82, ../scss/app.scss */
 .funny-message-w {
   padding-top: 20px;
-  min-height: 300px;
+  /*min-height: 300px;*/
+  /*height: 70%;*/
 }
 
-/* line 56, ../scss/app.scss */
+/* line 89, ../scss/app.scss */
+.funny-sub-message-w {
+  /*height: 30%;*/
+}
+
+/* line 94, ../scss/app.scss */
 .funny-sub-message {
   line-height: 97%;
   color: #545454;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 4vh;
+  font-size: 5vh;
 }
 
-/* The animation code */
-@keyframes move-in {
-  0% {
-    margin-left: -400px;
-  }
-  25% {
-    margin-left: 200px;
-  }
-  50% {
-    margin-left: 100px;
-  }
-  100% {
-    margin-left: 0px;
-  }
+/* line 103, ../scss/app.scss */
+.gauges {
+  vertical-align: text-bottom;
 }

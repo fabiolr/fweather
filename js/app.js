@@ -35,7 +35,7 @@ if (zip) {
 
   		// do here whatever u want to the dom
 
- 		console.log("dom ready")
+ 		console.log("In case you are interested, the DOM is now ready")
 
 
   });
@@ -49,8 +49,10 @@ $("#ChangeZip").click(function(){
     	zip = $('#zip').val();
  		document.cookie = "zip="+zip;
  		ClearDom();
+		$('#myModal').foundation('reveal', 'close');
     	GetWeather();
 		GetHistory();
+
 });
 
 // Gets Funny messages
@@ -78,6 +80,7 @@ $.getJSON("data/funny.json")
     return aFrom.filter(function(obj) {
       if(obj.caseID == id) {
         return obj
+        console.log("Oh, getMessages just ran");
       }
     })
   }
@@ -89,6 +92,7 @@ $.getJSON("data/funny.json")
 
   	aPossibleMessages = getMessages(id,oMessages);
   	return aPossibleMessages[Math.floor((Math.random() * aPossibleMessages.length))];
+        console.log("Oh, PickOneMessage just ran");
 
   }
 
@@ -126,7 +130,7 @@ function DoMsgLogic() {
 
 		}
 
-
+console.log("Oh, DoMsgLogic just ran");
 
 }
 
@@ -169,6 +173,7 @@ $.getJSON("http://api.wunderground.com/api/cb061a9fcab50867/planner_"+m+"01"+m+"
 
 	})
 	
+	console.log("Oh, GetHistory just ran");
 }
 
 
@@ -187,27 +192,35 @@ $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip="+zip+",us&APPID=6
 		if (goodToGo) {LetsGo()} else {goodToGo = true};
 
 	});
+	console.log("Oh, GetWeather just ran");
 }
 
 function FillDom() {
 
+		$("body").animate({backgroundColor: bgcolor}, 1200);
+
+		$("body").fadeIn(1200);
+
+
 		$("#CurrentCity").html(oWeather.name);
-		$("body").css( "background", bgcolor ); 
+		// $("body").css( "background", bgcolor );
 		$("#bigMsg").html(chosenMessage.bigMsg);
 		$("#smallMsg").html(chosenMessage.smallMsg);
+
+
+		console.log("Oh, FillDom just ran");
 
 }
 
 function ClearDom() {
 
-		$("#CurrentCity").remove();
-		$("body").css( "background", "white" ); 
-		$("#bigMsg").html("");
-		$("#smallMsg").html("Grabing data");
-		$("canvas").remove();
+		 $("canvas").fadeOut(500);
+		 $("body").fadeOut(500);
+
 		// $("#GaugeCanvas").remove;
 		// $("#ConditionCanvas").remove;
 
+		console.log("Oh, ClearDom just ran");
 }
 function PutInContext() {
 
@@ -215,8 +228,17 @@ function PutInContext() {
 
 	// update city name on gui
 	currTemp = oWeather.main.temp;
-	console.log(oWeather.name);
+	console.log("The City OpenWeather got for this ZIP is " + oWeather.name + " - Yeah, I know, kinda weird..");
+
+	console.log("Oh, PutInContext just ran");
 }
+
+function DoAnimation() {
+
+
+
+	console.log("Oh, DoAnimation just ran");
+ }
 
 function LetsGo() {
 
@@ -225,6 +247,9 @@ function LetsGo() {
 	DoMsgLogic();
 	FillDom();
 	DoCanvases();
+	DoAnimation();
+
+	console.log("Oh, LetsGo just ran");
 
 }
 

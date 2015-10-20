@@ -1,10 +1,20 @@
 @import "settings";
 @import "foundation";
 
-.message-block {
-		min-height: 250px;
+
+html { 
+
+	height: 100%; 
+}
+
+body {
+
+	display: none;
+	height: 100%; 
 
 }
+
+
 
 .weather-col {
 
@@ -24,6 +34,32 @@
 }
 
 
+a:visited  {
+
+		color: "grey";
+
+}
+
+
+.status-settings {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 200;
+		font-size: 2vh;
+		text-align: right;
+		color: "5b5b5b";
+
+}
+
+
+a:all {
+			color: "grey";
+		}
+
+.messages {
+		height: 70%;
+
+}
+
 figure {
 
 		max-width: 180px;
@@ -36,21 +72,23 @@ figure {
 .funny-message {
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 700;
-		font-size: 7vh; 
+		font-size: 8vh; 
 		line-height: 97%;
 
-.move-me {
-	
-		animation-name: move-in;
-   		animation-duration: 4s;
-}
 
 
 }
 
 .funny-message-w {
 		padding-top: 20px;
-		min-height: 300px;
+		/*min-height: 300px;*/
+		/*height: 70%;*/
+
+}
+
+.funny-sub-message-w {
+		/*height: 30%;*/
+
 }
 
 .funny-sub-message {
@@ -58,16 +96,13 @@ figure {
 		color: #545454;
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 400;
-		font-size: 4vh;
+		font-size: 5vh;
 
 }
 
-/* The animation code */
-@keyframes move-in {
-    0%   {margin-left: -400px;}
-    25%   {margin-left: 200px;}
-    50%   {margin-left: 100px;}
-    100%   {margin-left: 0px;}
+.gauges {
+
+	vertical-align: text-bottom;
 }
 
 // Or selectively include components

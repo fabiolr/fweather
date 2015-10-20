@@ -46,8 +46,10 @@ var oCondition = function( p ) {
 
 function DoCanvases () {
 
+$("canvas").remove();
 var gaugeCanvas = new p5(oGauge);
 var conditionCanvas = new p5(oCondition);
+console.log("Oh, DoCanvases just ran");
 
 }
 
