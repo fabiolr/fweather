@@ -1,41 +1,97 @@
 [{
-    "caseID": 4,
+    "caseID": 2,
     "bigMsg": "Turn on the A/C before you have sex",
     "smallMsg": "Once you are on out there, there is no turning back"
 },{
-    "caseID": 4,
+    "caseID": 9,
     "bigMsg": "No way you won't sweat today",
     "smallMsg": "Double up on the deodorant"
 },{
-    "caseID": 1,
+    "caseID": 2,
     "bigMsg": "Don't forget your poles",
     "smallMsg": "Time to go skiing"
 },{
-    "caseID": 2,
+    "caseID": 20,
     "bigMsg": "Locals are reaching for their coats",
     "smallMsg": "foreigners are calling it hell"
 },{
     "caseID": 2,
-    "bigMsg": "A chilly day for $city",
+    "bigMsg": "A chilly day for \"+oWeather.name\"",
     "smallMsg": "don't sweat"
 },{
-    "caseID": 3,
-    "bigMsg": "No way you won't sweat today",
-    "smallMsg": "Double up on the deodorant"
+    "caseID": 1,
+    "bigMsg": "Go back to your igloo",
+    "smallMsg": "even if you are an esquimo"
 },{
-    "caseID": 3,
+    "caseID": 9,
     "bigMsg": "It's fucking hot",
     "smallMsg": "period"
 },{
-    "caseID": 1,
+    "caseID": 2,
     "bigMsg": "You might want to stay in your igloo today",
     "smallMsg": "it's definetly warmer"
 },{
-    "caseID": 5,
-    "bigMsg": "Call in sick",
-    "smallMsg": "it's Hell on earth"
+    "caseID": 10,
+    "bigMsg": "Call in sick, seriously",
+    "smallMsg": "it's Hell on earth, record highs"
+},{
+    "caseID": 10,
+    "bigMsg": "Are you in an oven?",
+    "smallMsg": "you'll melt if you go out"
+},{
+    "caseID": 3,
+    "bigMsg": "It's actually kinda nice today",
+    "smallMsg": "or it's just another average day"
+},{
+    "caseID": 3,
+    "bigMsg": "A bit chilly but confy?",
+    "smallMsg": "everything seems too normal to be normal"
+},{
+    "caseID": 4,
+    "bigMsg": "Extra layer needed",
+    "smallMsg": "it's on the chilly side, get ready"
+},{
+    "caseID": 4,
+    "bigMsg": "If you are a girl, its cold today",
+    "smallMsg": "it's a confortable day for guys"
 },{
     "caseID": 5,
-    "bigMsg": "It's not a hot day",
-    "smallMsg": "it's just another atomic bomb"
+    "bigMsg": "Be prepared for the worst",
+    "smallMsg": "It's too hot for this time of the day"
+},{
+    "caseID": 5,
+    "bigMsg": "Don't be fooled by your mom",
+    "smallMsg": "It's too hot for this time of the day"
+},{
+    "caseID": 6,
+    "bigMsg": "Don't be fooled by your mommy",
+    "smallMsg": "It's too cold for this time of the day"
+},{
+    "caseID": 8,
+    "bigMsg": "Ok, I admit. It is nice today",
+    "smallMsg": "what can I say..."
+},{
+    "caseID": 8,
+    "bigMsg": "Enjoy",
+    "smallMsg": "We don't see nice day;s like this very often.."
+},{
+    "caseID": 9,
+    "bigMsg": "It's not fucking hot, but it is damn hot",
+    "smallMsg": "but don't complain just yet"
+},{
+    "caseID": 8,
+    "bigMsg": "Yeah Yeah you don't need me today",
+    "smallMsg": "It is just another average day"
+},{
+    "caseID": 7,
+    "bigMsg": "It's kinda cold",
+    "smallMsg": "or maybe just for girls"
+},{
+    "caseID": 1,
+    "bigMsg": "Don't go out. For nothing. Really.",
+    "smallMsg": "It's a record low for \"+oWeather.name\"  "
+},{
+    "caseID": 6,
+    "bigMsg": "it IS cold",
+    "smallMsg": "or it will be, believe me"
 }]

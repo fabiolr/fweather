@@ -40,12 +40,17 @@ a:visited  {
 
 }
 
+.location_icon {
+
+	max-height: 40px;
+
+}
 
 .status-settings {
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 200;
 		font-size: 2vh;
-		text-align: right;
+		text-align: center;
 		color: "5b5b5b";
 
 }
@@ -56,9 +61,14 @@ a:all {
 		}
 
 .messages {
-		height: 70%;
+			height: 85%;
 
 }
+
+.message-block {
+			height: 85%;
+}
+
 
 figure {
 

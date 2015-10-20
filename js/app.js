@@ -3,6 +3,13 @@
 $(document).foundation();
 var currTemp;
 var normalTemp = 72; // To be fed by normal data downloaded and parsed for location
+var historicalLowMin;
+var historicalLowAvg;
+var historicalLowMax;
+var historicalHighMin;
+var historicalHighAvg;
+var historicalHighMax;
+var withinAvg = .02; // percentage within average to be considered average
 var oMessages;
 var oWeather;
 var oHistory;
@@ -11,6 +18,7 @@ var zip;
 var d = new Date();
 var bgcolor;
 var goodToGo = 0;
+
 
 // load [hopefully] funny messages
 LoadMessages();
@@ -100,19 +108,49 @@ $.getJSON("data/funny.json")
 
 function DoMsgLogic() {
 
-		if (currTemp >= (1.1 * normalTemp)) {  
+
+		// if temp is extreme, we can call a message regardless of time of day
+
+		if (currTemp >= historicalHighMax) {  
 
 			// Case 5 - for really fucking hot
 			chosenMessage = PickOneMessage(5);
 			console.log("Temp Case5");
 			bgcolor = "red";
 
-		} else if (currTemp < .9 * normalTemp) {
+		} else if (currTemp <= historicalLowMin) {
 
 			// Case 1 - for really fucking cold 
 			chosenMessage = PickOneMessage(1);
 			console.log("Temp Case1");
 			bgcolor = "blue";
+
+
+			// Ok, temp is not extreme, so let's figure out what to make of it based on the time of day...
+			
+
+		} else if (d.getHours() > 10 && d.getHours < 18) {		// Run this during High Temp Hours of day
+
+
+			if (currTemp >= (historicalHighAvg * (1 - withinAvg)) && currTemp <= (historicalHighAvg * (1 + withinAvg))) {
+
+					// Case Average - hot as usual (high)
+
+			if (currTemp >= historicalHighAvg && currTemp <= historicalHighMax) {
+
+				// Case 
+			}
+
+		}
+
+
+		} else  {		// Run this during Low Temp Hours of day
+
+
+
+		}
+
+		// old code - merge into time
 
 		} else if (currTemp >= normalTemp) { 
 
@@ -162,6 +200,14 @@ $.getJSON("http://api.wunderground.com/api/cb061a9fcab50867/planner_"+m+"01"+m+"
 	.done(function(data) {
 		console.log("just got hisotrical data")
 		oHistory = data;
+
+		historicalLowMin = oHistory.trip.temp_low.min.F
+		historicalLowAvg = oHistory.trip.temp_low.avg.F
+		historicalLowMax = oHistory.trip.temp_low.max.F
+		historicalHighMin = oHistory.trip.temp_high.min.F
+		historicalHighAvg = oHistory.trip.temp_high.avg.F
+		historicalHighMax = oHistory.trip.temp_high.max.F
+
 		if (goodToGo) {LetsGo()} else {goodToGo = true};
 
 		 // example: oHistory.trip.temp_high.max.F 
@@ -199,7 +245,7 @@ function FillDom() {
 
 		$("body").animate({backgroundColor: bgcolor}, 1200);
 
-		$("body").fadeIn(1200);
+		$("body").fadeIn(1200	);
 
 
 		$("#CurrentCity").html(oWeather.name);
