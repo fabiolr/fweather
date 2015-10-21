@@ -1,8 +1,10 @@
-// Foundation JavaScript
-// Documentation can be found at: http://foundation.zurb.com/docs
+// Hello, I will try to give you a perspective on the weather. 
+// I mean, based on how it is now and how it has been this month in the last 30 years...
+// code by @fabiolr - feel free to copy & credit
+
+
 $(document).foundation();
 var currTemp;
-var normalTemp = 72; // To be fed by normal data downloaded and parsed for location
 var historicalLowMin;
 var historicalLowAvg;
 var historicalLowMax;
@@ -13,14 +15,18 @@ var withinAvg = .02; // percentage within average to be considered average
 var oMessages; // object with funny messages
 var oWeather;  // objects with current weather
 var oHistory;  // object with historical weather
-var chosenMessage;  // 
+var chosenMessage;  
 var zip;
 var d = new Date();
 var bgcolor;
-var goodToGo = 0;
+var goodToGo = 0; 
+var currentCase;
+var startHigh = 10;  // time of day to start using historical highs in comparisons
+var endHigh = 18;  // time to go back to using lows
+var  m = d.getMonth() + 1;
 
 
-// load [hopefully] funny messages
+// loads [hopefully] funny messages 
 LoadMessages();
 
 
@@ -30,12 +36,15 @@ zip = document.cookie.replace(/(?:(?:^|.*;\s*)zip\s*\=\s*([^;]*).*$)|^.*$/, "$1"
 
 if (zip) {
 
+	zip = Number(zip);
 	GetWeather();
 	GetHistory();
 
 } else {
 
 	// hide everything and request zip
+	$('#myModal').foundation('reveal', 'close');
+
 
 }
  	
@@ -43,7 +52,7 @@ if (zip) {
 
   		// do here whatever u want to the dom
 
- 		console.log("In case you are interested, the DOM is now ready")
+ 		console.log("In case you are interested, the DOM is now ready for manipulation")
 
 
   });
@@ -114,86 +123,72 @@ function DoMsgLogic() {
 		if (currTemp >= historicalHighMax) {  
 
 			// Case 5 - for really fucking hot
-			chosenMessage = PickOneMessage(5);
-			console.log("Temp Case5");
+			currentCase = 5;
 			bgcolor = "red";
 
 		} else if (currTemp <= historicalLowMin) {
 
 			// Case 1 - for really fucking cold 
-			chosenMessage = PickOneMessage(1);
-			console.log("Temp Case1");
+			currentCase = 1;
 			bgcolor = "blue";
 
-			}
-
+			/////////
 			// Ok, maybe the temp is not extreme, so let's figure out what to make of it based on the time of day...
-			
+			////////
 
-		 else if (d.getHours() > 10 && d.getHours < 18) {		// Run this during High Temp Hours of day
+		 } else if (d.getHours() > startHigh && d.getHours < endHigh) {		// Run this during High Temp Hours of day
 
 		 	console.log("At this time of the day I'll use HIGH hostorical temps to do decide the message");
 
 			if (currTemp >= (historicalHighAvg * (1 - withinAvg)) && currTemp <= (historicalHighAvg * (1 + withinAvg))) {
 
-						// Case 8 - Within High Average 
-					chosenMessage = PickOneMessage(8);
-					console.log("Temp Case 8 Within High Average");
+					// Case 8 - Within High Average 
+					currentCase = 8;
 					bgcolor = "grey";
 
 			} else if (currTemp <= historicalHighMin) {
 
 				// Case  6 - Cold for this time of day
-					chosenMessage = PickOneMessage(6);
-					console.log("Case  6 - Cold for this time of day");
+					currentCase = 6;
 					bgcolor = "cyan";
 
 			} else if (currTemp >= historicalHighMin && currTemp < historicalHighAvg) {
 
 				// Case  7 - Confortable for here
-					chosenMessage = PickOneMessage(7);
-					console.log("Case  7 - Ok for here");
+					currentCase = 7;
 					bgcolor = "lavender";
 
 			} else if (currTemp >= historicalHighAvg && currTemp < historicalHighMax) {
 
 				// Case  9 - It is very hot
-					chosenMessage = PickOneMessage(9);
-					console.log("Case  9 - It is very hot");
+					currentCase = 9;
 					bgcolor = "peru";
 
 			}
-
 
 		} else  {		// Run this during the rest of the day
 
 		 	console.log("At this time of the day I'll use LOW hostorical temps to do decide the message");
 
-
 			if (currTemp >= (historicalLowAvg * (1 - withinAvg)) && currTemp <= (historicalLowAvg * (1 + withinAvg))) {
 
 						// Case 3 - Within Low Average 
-					chosenMessage = PickOneMessage(3);
-					console.log("Case 3 - Within Low Average");
+					currentCase = 3;
 					bgcolor = "moccasin";
 		}
-
 
 			else if (currTemp >= historicalLowAvg && currTemp < historicalLowMax) {
 
 				// Case 4 Its kinda chilly
-					chosenMessage = PickOneMessage(4);
-					console.log("Case  4 - 	Its kinda chilly");
+					currentCase = 4;
 					bgcolor = "lavender";
 
 			}
 
-
 			else if (currTemp >= historicalLowMin && currTemp < historicalLowAvg) {
 
 				// Case 2 Its cold!
-					chosenMessage = PickOneMessage(2);
-					console.log("Case 2 Its cold");
+					currentCase = 2;
 					bgcolor = "blue";
 
 			}
@@ -201,15 +196,15 @@ function DoMsgLogic() {
 			else if (currTemp >= historicalLowMax) {
 
 				// Case  5 Its actually hot for this time of the day
-					chosenMessage = PickOneMessage(5);
-					console.log("Case  5 Its actually hot for this time of the day");
+					currentCase = 5;
 					bgcolor = "red";
 
 			}
 
 		}
 
-console.log("Oh, DoMsgLogic just ran");
+chosenMessage = PickOneMessage(currentCase);
+console.log("Message selected randomly for case #" + currentCase);
 
 }
 
@@ -229,38 +224,35 @@ console.log("Oh, DoMsgLogic just ran");
 ///  HISTORICAL DATA API CALLS AND HANDLING   ///
 /////////////////////////////////////////////////
 
-var  m = d.getMonth() + 1;
-
 
 function GetHistory() {
 
-		console.log("trying to get hisotrical data")
+		console.log("In the market for some historical data")
+		$.getJSON("http://api.wunderground.com/api/cb061a9fcab50867/planner_"+m+"01"+m+"30/q/"+zip+".json")
+		
+			.done(function(data) {
+			oHistory = data;
 
-$.getJSON("http://api.wunderground.com/api/cb061a9fcab50867/planner_"+m+"01"+m+"30/q/"+zip+".json")
+			console.log("GetHistory: requested data from " + oHistory.trip.airport_code + " for month " + m + " and they replied " + oHistory.trip.title);
+				
+			historicalLowMin = oHistory.trip.temp_low.min.F;
+			historicalLowAvg = oHistory.trip.temp_low.avg.F;
+			historicalLowMax = oHistory.trip.temp_low.max.F;
+			historicalHighMin = oHistory.trip.temp_high.min.F;
+			historicalHighAvg = oHistory.trip.temp_high.avg.F;
+			historicalHighMax = oHistory.trip.temp_high.max.F;
 
-	.done(function(data) {
-		oHistory = data;
-		console.log("just got hisotrical data for " + oHistory.trip.airport_code + " for " + oHistory.trip.title);
+			cookies.set('weather_history', historicalLowMin);
 
-		historicalLowMin = oHistory.trip.temp_low.min.F;
-		historicalLowAvg = oHistory.trip.temp_low.avg.F;
-		historicalLowMax = oHistory.trip.temp_low.max.F;
-		historicalHighMin = oHistory.trip.temp_high.min.F;
-		historicalHighAvg = oHistory.trip.temp_high.avg.F;
-		historicalHighMax = oHistory.trip.temp_high.max.F;
+			if (goodToGo) {LetsGo()} else {goodToGo = true};  // runs LetsGo only if other APIs have also done their jobs
 
-		if (goodToGo) {LetsGo()} else {goodToGo = true};
+	 	})
 
-		 // example: oHistory.trip.temp_high.max.F 
-
-	 })
-
-	.fail(function(){
+			.fail(function(){
 			console.log("fucking error trying to get historical data");
 
-	})
+		})
 	
-	console.log("Oh, GetHistory just ran");
 }
 
 
@@ -270,17 +262,23 @@ $.getJSON("http://api.wunderground.com/api/cb061a9fcab50867/planner_"+m+"01"+m+"
 
 function GetWeather() {
 
-		console.log("going out to get weather data for "+zip)
+		console.log("in the market for current weather data for "+zip)
 
 $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip="+zip+",us&APPID=60f3da918baca596bc5457e165aa3cd3&units=imperial")
 	.done(function(data) {
-		console.log("just got current weather data")
+		console.log("GetWeather: Current weather loaded just fine")
 		 oWeather = data;
-		if (goodToGo) {LetsGo()} else {goodToGo = true};
+
+		if (goodToGo) {LetsGo()} else {goodToGo = true};   // runs LetsGo only if other APIs have also done their jobs
 
 	});
-	console.log("Oh, GetWeather just ran");
+
 }
+
+
+/////////////////////////////////////////
+///  DOM MANIPULATION FUNCTIONS      ///
+////////////////////////////////////////
 
 function FillDom() {
 
@@ -295,7 +293,7 @@ function FillDom() {
 		$("#smallMsg").html(chosenMessage.smallMsg);
 
 
-		console.log("Oh, FillDom just ran");
+		console.log("FillDom has... mmm... filled the dom..! ");
 
 }
 
@@ -307,36 +305,31 @@ function ClearDom() {
 		// $("#GaugeCanvas").remove;
 		// $("#ConditionCanvas").remove;
 
-		console.log("Oh, ClearDom just ran");
+		console.log("ClearDom has done its cleasning job");
 }
+
+
 function PutInContext() {
 
 	// get temperature and put into context
 
 	// update city name on gui
 	currTemp = oWeather.main.temp;
-	console.log("The City OpenWeather got for this ZIP is " + oWeather.name + " - Yeah, I know, kinda weird..");
-
-	console.log("Oh, PutInContext just ran");
+	console.log("PutInContext: The City OpenWeather got for this ZIP is " + oWeather.name + " - Yeah, I know, may be weird..");
 }
 
-function DoAnimation() {
-
-
-
-	console.log("Oh, DoAnimation just ran");
- }
 
 function LetsGo() {
+
+	console.log("OK, I got all I need, LetsGo!");
 
 	goodToGo = 0;
 	PutInContext();
 	DoMsgLogic();
 	FillDom();
 	DoCanvases();
-	DoAnimation();
 
-	console.log("Oh, LetsGo just ran");
+	console.log("LetsGo: I'm done for now");
 
 }
 

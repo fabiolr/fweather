@@ -1,0 +1,33 @@
+{
+    "name": "jaaulde-jquery-cookies",
+    "description": "Adds jaaulde-cookies to the jQuery namespace, and provides jQ extension methods to bind cookies to form values and html elements.",
+    "authors": [
+        "Jim Auldridge <auldridgej@gmail.com>"
+    ],
+    "main": "lib/jaaulde-cookies.jquery.js",
+    "keywords": [
+        "jquery-plugin",
+        "ecosystem:jquery",
+        "jQuery",
+        "cookie",
+        "cookies",
+        "DOM",
+        "elements",
+        "form",
+        "input",
+        "value"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "jquery": "~1.11.0",
+        "jaaulde-cookies": "~3.0.0"
+    },
+    "homepage": "https://github.com/JAAulde/jquery-cookies"
+}
