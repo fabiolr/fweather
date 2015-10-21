@@ -44,8 +44,8 @@
     "smallMsg": "or it's just another average day"
 },{
     "caseID": 3,
-    "bigMsg": "A bit chilly but confy?",
-    "smallMsg": "everything seems too normal to be normal"
+    "bigMsg": "A bit chilly but confy",
+    "smallMsg": "way too normal to be normal"
 },{
     "caseID": 4,
     "bigMsg": "Extra layer needed",
@@ -53,7 +53,7 @@
 },{
     "caseID": 4,
     "bigMsg": "If you are a girl, its cold today",
-    "smallMsg": "it's a confortable day for guys"
+    "smallMsg": "but it is not bad for \"+oWeather.name\""
 },{
     "caseID": 5,
     "bigMsg": "Be prepared for the worst",

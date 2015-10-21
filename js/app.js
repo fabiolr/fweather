@@ -10,10 +10,10 @@ var historicalHighMin;
 var historicalHighAvg;
 var historicalHighMax;
 var withinAvg = .02; // percentage within average to be considered average
-var oMessages;
-var oWeather;
-var oHistory;
-var chosenMessage;
+var oMessages; // object with funny messages
+var oWeather;  // objects with current weather
+var oHistory;  // object with historical weather
+var chosenMessage;  // 
 var zip;
 var d = new Date();
 var bgcolor;
@@ -125,46 +125,87 @@ function DoMsgLogic() {
 			console.log("Temp Case1");
 			bgcolor = "blue";
 
+			}
 
-			// Ok, temp is not extreme, so let's figure out what to make of it based on the time of day...
+			// Ok, maybe the temp is not extreme, so let's figure out what to make of it based on the time of day...
 			
 
-		} else if (d.getHours() > 10 && d.getHours < 18) {		// Run this during High Temp Hours of day
+		 else if (d.getHours() > 10 && d.getHours < 18) {		// Run this during High Temp Hours of day
 
+		 	console.log("At this time of the day I'll use HIGH hostorical temps to do decide the message");
 
 			if (currTemp >= (historicalHighAvg * (1 - withinAvg)) && currTemp <= (historicalHighAvg * (1 + withinAvg))) {
 
-					// Case Average - hot as usual (high)
+						// Case 8 - Within High Average 
+					chosenMessage = PickOneMessage(8);
+					console.log("Temp Case 8 Within High Average");
+					bgcolor = "grey";
 
-			if (currTemp >= historicalHighAvg && currTemp <= historicalHighMax) {
+			} else if (currTemp <= historicalHighMin) {
 
-				// Case 
+				// Case  6 - Cold for this time of day
+					chosenMessage = PickOneMessage(6);
+					console.log("Case  6 - Cold for this time of day");
+					bgcolor = "cyan";
+
+			} else if (currTemp >= historicalHighMin && currTemp < historicalHighAvg) {
+
+				// Case  7 - Confortable for here
+					chosenMessage = PickOneMessage(7);
+					console.log("Case  7 - Ok for here");
+					bgcolor = "lavender";
+
+			} else if (currTemp >= historicalHighAvg && currTemp < historicalHighMax) {
+
+				// Case  9 - It is very hot
+					chosenMessage = PickOneMessage(9);
+					console.log("Case  9 - It is very hot");
+					bgcolor = "peru";
+
 			}
 
+
+		} else  {		// Run this during the rest of the day
+
+		 	console.log("At this time of the day I'll use LOW hostorical temps to do decide the message");
+
+
+			if (currTemp >= (historicalLowAvg * (1 - withinAvg)) && currTemp <= (historicalLowAvg * (1 + withinAvg))) {
+
+						// Case 3 - Within Low Average 
+					chosenMessage = PickOneMessage(3);
+					console.log("Case 3 - Within Low Average");
+					bgcolor = "moccasin";
 		}
 
 
-		} else  {		// Run this during Low Temp Hours of day
+			else if (currTemp >= historicalLowAvg && currTemp < historicalLowMax) {
+
+				// Case 4 Its kinda chilly
+					chosenMessage = PickOneMessage(4);
+					console.log("Case  4 - 	Its kinda chilly");
+					bgcolor = "lavender";
+
+			}
 
 
+			else if (currTemp >= historicalLowMin && currTemp < historicalLowAvg) {
 
-		}
+				// Case 2 Its cold!
+					chosenMessage = PickOneMessage(2);
+					console.log("Case 2 Its cold");
+					bgcolor = "blue";
 
-		// old code - merge into time
+			}
 
-		} else if (currTemp >= normalTemp) { 
+			else if (currTemp >= historicalLowMax) {
 
-			// Case 3 - for hot as usual
-			chosenMessage = PickOneMessage(3);
-			console.log("Temp Case3");
-			bgcolor = "red";
+				// Case  5 Its actually hot for this time of the day
+					chosenMessage = PickOneMessage(5);
+					console.log("Case  5 Its actually hot for this time of the day");
+					bgcolor = "red";
 
-		} else if (currTemp < normalTemp) {
-
-			// Case 2 - for cold as usual
-			chosenMessage = PickOneMessage(2);
-			console.log("Temp Case2");
-			bgcolor = "blue";
+			}
 
 		}
 
@@ -198,15 +239,15 @@ function GetHistory() {
 $.getJSON("http://api.wunderground.com/api/cb061a9fcab50867/planner_"+m+"01"+m+"30/q/"+zip+".json")
 
 	.done(function(data) {
-		console.log("just got hisotrical data")
 		oHistory = data;
+		console.log("just got hisotrical data for " + oHistory.trip.airport_code + " for " + oHistory.trip.title);
 
-		historicalLowMin = oHistory.trip.temp_low.min.F
-		historicalLowAvg = oHistory.trip.temp_low.avg.F
-		historicalLowMax = oHistory.trip.temp_low.max.F
-		historicalHighMin = oHistory.trip.temp_high.min.F
-		historicalHighAvg = oHistory.trip.temp_high.avg.F
-		historicalHighMax = oHistory.trip.temp_high.max.F
+		historicalLowMin = oHistory.trip.temp_low.min.F;
+		historicalLowAvg = oHistory.trip.temp_low.avg.F;
+		historicalLowMax = oHistory.trip.temp_low.max.F;
+		historicalHighMin = oHistory.trip.temp_high.min.F;
+		historicalHighAvg = oHistory.trip.temp_high.avg.F;
+		historicalHighMax = oHistory.trip.temp_high.max.F;
 
 		if (goodToGo) {LetsGo()} else {goodToGo = true};
 
