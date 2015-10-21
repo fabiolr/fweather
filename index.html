@@ -18,8 +18,6 @@
   -->
       <!-- <script language="javascript" type="text/javascript" src="bower_components/jquery.cookie/jquery.cookie.js"></script> -->
 
-
-
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:800,400,700' rel='stylesheet' type='text/css'>  
 
   </head>
@@ -57,16 +55,7 @@
     </div>
 </div>
 
-
-<!-- popup settings -->
-
-<div id="myModal" class="reveal-modal tiny" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">Use your ZIP to get the stuff that matters to you.</h2>
-  <p><input id="zip" type="text" placeholder="ZIP Code"></p>
-  <a href="#" id="ChangeZip" class="alert button expand">Change</a>
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-</div>
-
+<!-- Location and Settings -->
 
 <div class="row">
 
@@ -78,19 +67,30 @@
 <div class="row">
 
   <div class="small-8 large-8 columns"><p></p></div>
-  <div id="CurrentCity" class="small-4 large-4 status-settings columns"></div>
+  <div id="CurrentCity" class="small-4 large-4 columns status-settings"></div>
 
 </div>
 
 
 
+<!-- popup modal for settings -->
 
+<div id="myModal" class="reveal-modal tiny" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Use your ZIP to get the stuff that matters to you.</h2>
+  <p><input id="zip" type="text" placeholder="ZIP Code"></p>
+  <a href="#" id="ChangeZip" class="alert button expand">Change</a>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
 
 
 
 
     <script src="bower_components/foundation/js/foundation.min.js"></script>
     <script src="js/app.js"></script>
+
+
+
+
 
   </body>
 </html>

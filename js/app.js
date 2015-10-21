@@ -18,12 +18,15 @@ var oHistory;  // object with historical weather
 var chosenMessage;  
 var zip;
 var d = new Date();
-var bgcolor;
+var bgcolor;   // string form
+var oBgColor; // object form
 var goodToGo = 0; 
 var currentCase;
 var startHigh = 10;  // time of day to start using historical highs in comparisons
 var endHigh = 18;  // time to go back to using lows
 var  m = d.getMonth() + 1;
+var coldColor = "#00A0E9";
+var hotColor = "#E60012";
 
 
 // loads [hopefully] funny messages 
@@ -124,19 +127,19 @@ function DoMsgLogic() {
 
 			// Case 5 - for really fucking hot
 			currentCase = 5;
-			bgcolor = "red";
+			// bgcolor = "red";
 
 		} else if (currTemp <= historicalLowMin) {
 
 			// Case 1 - for really fucking cold 
 			currentCase = 1;
-			bgcolor = "blue";
+			// bgcolor = "blue";
 
 			/////////
 			// Ok, maybe the temp is not extreme, so let's figure out what to make of it based on the time of day...
 			////////
 
-		 } else if (d.getHours() > startHigh && d.getHours < endHigh) {		// Run this during High Temp Hours of day
+		 } else if (d.getHours() > startHigh && d.getHours() < endHigh) {		// Run this during High Temp Hours of day
 
 		 	console.log("At this time of the day I'll use HIGH hostorical temps to do decide the message");
 
@@ -144,25 +147,25 @@ function DoMsgLogic() {
 
 					// Case 8 - Within High Average 
 					currentCase = 8;
-					bgcolor = "grey";
+					// bgcolor = "grey";
 
 			} else if (currTemp <= historicalHighMin) {
 
 				// Case  6 - Cold for this time of day
 					currentCase = 6;
-					bgcolor = "cyan";
+					// bgcolor = "cyan";
 
 			} else if (currTemp >= historicalHighMin && currTemp < historicalHighAvg) {
 
 				// Case  7 - Confortable for here
 					currentCase = 7;
-					bgcolor = "lavender";
+					// bgcolor = "lavender";
 
 			} else if (currTemp >= historicalHighAvg && currTemp < historicalHighMax) {
 
 				// Case  9 - It is very hot
 					currentCase = 9;
-					bgcolor = "peru";
+					// bgcolor = "peru";
 
 			}
 
@@ -174,14 +177,14 @@ function DoMsgLogic() {
 
 						// Case 3 - Within Low Average 
 					currentCase = 3;
-					bgcolor = "moccasin";
+					// bgcolor = "moccasin";
 		}
 
 			else if (currTemp >= historicalLowAvg && currTemp < historicalLowMax) {
 
 				// Case 4 Its kinda chilly
 					currentCase = 4;
-					bgcolor = "lavender";
+					// bgcolor = "lavender";
 
 			}
 
@@ -189,7 +192,7 @@ function DoMsgLogic() {
 
 				// Case 2 Its cold!
 					currentCase = 2;
-					bgcolor = "blue";
+					// bgcolor = "blue";
 
 			}
 
@@ -197,7 +200,7 @@ function DoMsgLogic() {
 
 				// Case  5 Its actually hot for this time of the day
 					currentCase = 5;
-					bgcolor = "red";
+					// bgcolor = "red";
 
 			}
 
@@ -242,8 +245,6 @@ function GetHistory() {
 			historicalHighAvg = oHistory.trip.temp_high.avg.F;
 			historicalHighMax = oHistory.trip.temp_high.max.F;
 
-			cookies.set('weather_history', historicalLowMin);
-
 			if (goodToGo) {LetsGo()} else {goodToGo = true};  // runs LetsGo only if other APIs have also done their jobs
 
 	 	})
@@ -282,6 +283,7 @@ $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip="+zip+",us&APPID=6
 
 function FillDom() {
 
+		bgcolor = "rgb("+oBgColor.rgba[0]+","+oBgColor.rgba[1]+","+oBgColor.rgba[2]+")";
 		$("body").animate({backgroundColor: bgcolor}, 1200);
 
 		$("body").fadeIn(1200	);
@@ -316,6 +318,11 @@ function PutInContext() {
 	// update city name on gui
 	currTemp = oWeather.main.temp;
 	console.log("PutInContext: The City OpenWeather got for this ZIP is " + oWeather.name + " - Yeah, I know, may be weird..");
+	tempRange = historicalHighMax - historicalLowMin;
+	tempFactor = (currTemp - historicalLowMin) / tempRange;
+	minFactor = (historicalLowAvg - historicalLowMin) / tempRange;
+	maxFactor = (historicalHighAvg - historicalLowMin) / tempRange;
+
 }
 
 
@@ -326,8 +333,8 @@ function LetsGo() {
 	goodToGo = 0;
 	PutInContext();
 	DoMsgLogic();
-	FillDom();
 	DoCanvases();
+	FillDom();
 
 	console.log("LetsGo: I'm done for now");
 

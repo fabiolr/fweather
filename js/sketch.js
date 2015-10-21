@@ -5,19 +5,56 @@
 
 var oGauge = function( p ) {
 
+  var img;
+
   p.setup = function() {
 
+    img = p.loadImage("img/gauge2.svg");
     var cnv = p.createCanvas(120, 60);
+    p.image(img, 0, 0);
     cnv.parent("gauge");
     cnv.id("GaugeCanvas");
+    oBgColor = p.lerpColor(coldColor,hotColor,tempFactor);
+
+
+
   };
 
+    var cangle = -120;
+    var minangle = (180 * minFactor) - 90;
+    var maxangle = (180 * maxFactor) - 90;
+
   p.draw = function() {
-    p.background(bgcolor);
-    p.fill(255);
-    p.rect(10,10,100,10);
-    p.fill(0);
-    p.rect(10+currTemp,10,10,10);
+
+    var angle = (180 * tempFactor);
+
+    p.background(oBgColor);
+    p.image(img, 0, 0);
+    p.stroke("#5b5b5b");
+    p.translate(60,56);
+    p.angleMode(p.DEGREES);
+    p.push();
+        p.rotate(minangle);
+        p.line(0,-38,0,-43); 
+        p.rotate(maxangle);
+        p.line(0,-38,0,-43); 
+    p.pop();
+      if (cangle < angle) {
+        p.rotate(cangle);
+        //p.line(0,-6,0,-40);
+        p.fill(oBgColor);
+        p.triangle(-6,1,-6,-1,-40,0)
+        cangle = cangle + 1;
+
+      } else {
+
+        p.rotate(angle);
+        p.fill(oBgColor);
+        p.triangle(-6,1,-6,-1,-40,0)
+        //p.line(0,-6,0,-40);
+
+      }
+
   };
 };
 
@@ -34,8 +71,9 @@ var oCondition = function( p ) {
     cnv.id("ConditionCanvas");
   };
 
+
   p.draw = function() {
-    p.background(bgcolor);
+    p.background(oBgColor);
     p.fill(255);
     p.text(currTemp+"F in "+oWeather.name,10,10);
   };
