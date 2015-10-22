@@ -9811,28 +9811,37 @@ figure {
   line-height: 97%;
 }
 
-/* line 92, ../scss/app.scss */
+/* line 88, ../scss/app.scss */
+.dark-text {
+  color: #262626;
+}
+
+/* line 93, ../scss/app.scss */
+.light-text {
+  color: #b2b2b2;
+}
+
+/* line 99, ../scss/app.scss */
 .funny-message-w {
   padding-top: 20px;
   /*min-height: 300px;*/
   /*height: 70%;*/
 }
 
-/* line 99, ../scss/app.scss */
+/* line 106, ../scss/app.scss */
 .funny-sub-message-w {
   /*height: 30%;*/
 }
 
-/* line 104, ../scss/app.scss */
+/* line 111, ../scss/app.scss */
 .funny-sub-message {
   line-height: 97%;
-  color: #545454;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 5vh;
 }
 
-/* line 113, ../scss/app.scss */
+/* line 119, ../scss/app.scss */
 .gauges {
   vertical-align: text-bottom;
 }

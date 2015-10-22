@@ -1,6 +1,6 @@
 // Hello, I will try to give you a perspective on the weather. 
 // I mean, based on how it is now and how it has been this month in the last 30 years...
-// code by @fabiolr - feel free to copy & credit
+// code by @fabiolr - feel free to copy & credit!
 
 
 $(document).foundation();
@@ -27,6 +27,12 @@ var endHigh = 18;  // time to go back to using lows
 var  m = d.getMonth() + 1;
 var coldColor = "#00A0E9";
 var hotColor = "#E60012";
+var currentWeather;
+var weatherID; // cloud cover and rain info saved here
+var textColor;
+var textColorHex;
+var yiq;
+
 
 
 // loads [hopefully] funny messages 
@@ -45,8 +51,10 @@ if (zip) {
 
 } else {
 
+	console.log("No Cookie Found");
 	// hide everything and request zip
-	$('#myModal').foundation('reveal', 'close');
+	$('#myModal').foundation('reveal', 'open');
+	$("body").fadeIn(1200	);
 
 
 }
@@ -269,13 +277,36 @@ $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip="+zip+",us&APPID=6
 	.done(function(data) {
 		console.log("GetWeather: Current weather loaded just fine")
 		 oWeather = data;
+		 weatherID = oWeather.weather[0].id;
+
+		 // if (oWeather.cod == 404) {
+
+		 // 	document.cookie = "zip=";
+			// ClearDom();
+			// $('#myModal').foundation('reveal', 'open');
+			// $("body").fadeIn(1200);
+		 // 	console.log("Error 404 on OpenWeather");
+
+		// } else { 
 
 		if (goodToGo) {LetsGo()} else {goodToGo = true};   // runs LetsGo only if other APIs have also done their jobs
 
+	// }
 	});
 
 }
 
+
+function DoIconLogic() {
+
+
+	if (weatherID >= 200 && weatherID <= 531) {currentWeather = "rain.svg"}
+	if (weatherID >= 600 && weatherID <= 622) {currentWeather = "snow.svg"}
+	if (weatherID >= 801 && weatherID <= 804) {currentWeather = "cloud.svg"}
+	if (weatherID >= 900) {currentWeather = "warning.svg"}
+	if (weatherID == 800) {currentWeather = "sun.svg"}
+
+}
 
 /////////////////////////////////////////
 ///  DOM MANIPULATION FUNCTIONS      ///
@@ -283,21 +314,25 @@ $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip="+zip+",us&APPID=6
 
 function FillDom() {
 
-		bgcolor = "rgb("+oBgColor.rgba[0]+","+oBgColor.rgba[1]+","+oBgColor.rgba[2]+")";
-		$("body").animate({backgroundColor: bgcolor}, 1200);
+		bgcolor = "rgb("+oBgColor.rgba[0]+","+oBgColor.rgba[1]+","+oBgColor.rgba[2]+")";			
+			
+		$("#smallMsg").addClass(textColor);
+		$("#CurrentCity").addClass(textColor);
 
 		$("body").fadeIn(1200	);
 
-
+		$("#locicon" ).attr( "src", "img/"+textColor+"/location.svg" );
 		$("#CurrentCity").html(oWeather.name);
-		// $("body").css( "background", bgcolor );
+		$("body").css( "background", bgcolor );
 		$("#bigMsg").html(chosenMessage.bigMsg);
 		$("#smallMsg").html(chosenMessage.smallMsg);
+		
 
 
 		console.log("FillDom has... mmm... filled the dom..! ");
 
 }
+
 
 function ClearDom() {
 
@@ -330,9 +365,12 @@ function LetsGo() {
 
 	console.log("OK, I got all I need, LetsGo!");
 
+
+
 	goodToGo = 0;
 	PutInContext();
 	DoMsgLogic();
+	DoIconLogic();
 	DoCanvases();
 	FillDom();
 

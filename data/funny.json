@@ -16,7 +16,7 @@
     "smallMsg": "foreigners are calling it hell"
 },{
     "caseID": 2,
-    "bigMsg": "A chilly day for \"+oWeather.name\"",
+    "bigMsg": "A chilly day for locals",
     "smallMsg": "don't sweat"
 },{
     "caseID": 1,
@@ -53,7 +53,7 @@
 },{
     "caseID": 4,
     "bigMsg": "If you are a girl, its cold today",
-    "smallMsg": "but it is not bad for \"+oWeather.name\""
+    "smallMsg": "but it is not bad for locals"
 },{
     "caseID": 5,
     "bigMsg": "Be prepared for the worst",
@@ -73,7 +73,7 @@
 },{
     "caseID": 8,
     "bigMsg": "Enjoy",
-    "smallMsg": "We don't see nice day;s like this very often.."
+    "smallMsg": "We don't see nice days like this very often.."
 },{
     "caseID": 9,
     "bigMsg": "It's not fucking hot, but it is damn hot",
@@ -89,7 +89,7 @@
 },{
     "caseID": 1,
     "bigMsg": "Don't go out. For nothing. Really.",
-    "smallMsg": "It's a record low for \"+oWeather.name\"  "
+    "smallMsg": "It's a record low here"
 },{
     "caseID": 6,
     "bigMsg": "it IS cold",

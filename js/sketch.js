@@ -9,14 +9,17 @@ var oGauge = function( p ) {
 
   p.setup = function() {
 
-    img = p.loadImage("img/gauge2.svg");
+    oBgColor = p.lerpColor(coldColor,hotColor,tempFactor);
+        // Decide color of text based on background color to ensure contrast\
+    yiq = ((oBgColor.rgba[0]*299)+(oBgColor.rgba[1]*587)+(oBgColor.rgba[2]*114))/1000;
+    textColor =  (yiq >= 128) ? 'dark-text' : 'light-text';
+    textColorHex =  (yiq >= 128) ? "#262626" : "#b2b2b2";
+
+    img = p.loadImage("img/"+textColor+"/gauge2.svg");
     var cnv = p.createCanvas(120, 60);
     p.image(img, 0, 0);
     cnv.parent("gauge");
     cnv.id("GaugeCanvas");
-    oBgColor = p.lerpColor(coldColor,hotColor,tempFactor);
-
-
 
   };
 
@@ -66,6 +69,7 @@ var oCondition = function( p ) {
 
   p.setup = function() {
 
+    img = p.loadImage("img/"+textColor+"/"+currentWeather);
     var cnv = p.createCanvas(120, 60);
     cnv.parent("condition");
     cnv.id("ConditionCanvas");
@@ -74,8 +78,9 @@ var oCondition = function( p ) {
 
   p.draw = function() {
     p.background(oBgColor);
-    p.fill(255);
-    p.text(currTemp+"F in "+oWeather.name,10,10);
+    p.image(img, 0, 0);
+
+    
   };
 };
 

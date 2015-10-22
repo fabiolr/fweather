@@ -84,10 +84,17 @@ figure {
 		font-weight: 700;
 		font-size: 8vh; 
 		line-height: 97%;
-
-
-
 }
+.dark-text {
+
+		color: #262626;
+}
+
+.light-text {
+
+		color: #b2b2b2;
+}
+
 
 .funny-message-w {
 		padding-top: 20px;
@@ -103,7 +110,6 @@ figure {
 
 .funny-sub-message {
 		line-height: 97%;
-		color: #545454;
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 400;
 		font-size: 5vh;
