@@ -19,6 +19,8 @@ body {
 .weather-col {
 
 		vertical-align: bottom;
+		min-height: 150px;
+		padding-top: 20px;
 }
 
 
@@ -55,13 +57,17 @@ a:visited  {
 
 }
 
+.locset {
+		padding-right: 60px;
+
+}
 
 a:all {
 			color: "grey";
 		}
 
 .messages {
-			height: 85%;
+			height: 60%;
 
 }
 

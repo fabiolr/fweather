@@ -9749,29 +9749,31 @@ body {
 /* line 19, ../scss/app.scss */
 .weather-col {
   vertical-align: bottom;
+  min-height: 150px;
+  padding-top: 20px;
 }
 
-/* line 25, ../scss/app.scss */
+/* line 27, ../scss/app.scss */
 .grow {
   transition: all .2s ease-in-out;
 }
 
-/* line 31, ../scss/app.scss */
+/* line 33, ../scss/app.scss */
 .grow:hover {
   transform: scale(1.03);
 }
 
-/* line 37, ../scss/app.scss */
+/* line 39, ../scss/app.scss */
 a:visited {
   color: "grey";
 }
 
-/* line 43, ../scss/app.scss */
+/* line 45, ../scss/app.scss */
 .location_icon {
   max-height: 40px;
 }
 
-/* line 49, ../scss/app.scss */
+/* line 51, ../scss/app.scss */
 .status-settings {
   font-family: 'Open Sans', sans-serif;
   font-weight: 200;
@@ -9780,22 +9782,27 @@ a:visited {
   color: #5b5b5b;
 }
 
-/* line 59, ../scss/app.scss */
+/* line 60, ../scss/app.scss */
+.locset {
+  padding-right: 60px;
+}
+
+/* line 65, ../scss/app.scss */
 a:all {
   color: "grey";
 }
 
-/* line 63, ../scss/app.scss */
+/* line 69, ../scss/app.scss */
 .messages {
-  height: 85%;
+  height: 60%;
 }
 
-/* line 68, ../scss/app.scss */
+/* line 74, ../scss/app.scss */
 .message-block {
   height: 85%;
 }
 
-/* line 73, ../scss/app.scss */
+/* line 79, ../scss/app.scss */
 figure {
   max-width: 180px;
   min-width: 120px;
@@ -9803,7 +9810,7 @@ figure {
   margin-left: 0px;
 }
 
-/* line 82, ../scss/app.scss */
+/* line 88, ../scss/app.scss */
 .funny-message {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
@@ -9811,29 +9818,29 @@ figure {
   line-height: 97%;
 }
 
-/* line 88, ../scss/app.scss */
+/* line 94, ../scss/app.scss */
 .dark-text {
   color: #262626;
 }
 
-/* line 93, ../scss/app.scss */
+/* line 99, ../scss/app.scss */
 .light-text {
   color: #b2b2b2;
 }
 
-/* line 99, ../scss/app.scss */
+/* line 105, ../scss/app.scss */
 .funny-message-w {
   padding-top: 20px;
   /*min-height: 300px;*/
   /*height: 70%;*/
 }
 
-/* line 106, ../scss/app.scss */
+/* line 112, ../scss/app.scss */
 .funny-sub-message-w {
   /*height: 30%;*/
 }
 
-/* line 111, ../scss/app.scss */
+/* line 117, ../scss/app.scss */
 .funny-sub-message {
   line-height: 97%;
   font-family: 'Open Sans', sans-serif;
@@ -9841,7 +9848,7 @@ figure {
   font-size: 5vh;
 }
 
-/* line 119, ../scss/app.scss */
+/* line 125, ../scss/app.scss */
 .gauges {
   vertical-align: text-bottom;
 }

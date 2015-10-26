@@ -1,30 +1,14 @@
-# Foundation Compass Template
 
-The easiest way to get started with Foundation + Compass.
+# Documentantion for F Weather
 
-## Requirements
+This App will gather two sets of data, based on the entered ZIP code or the location provided by the web browser.
 
-  * Ruby 1.9+
-  * [Node.js](http://nodejs.org)
-  * [compass](http://compass-style.org/): `gem install compass`
-  * [bower](http://bower.io): `npm install bower -g`
+The current data, gathered from OpenWeather, and Historical Climate Data, from Wunderground.
 
-## Quickstart
+Historical data contain the averages (High and Low) for that month in the last 30 years.
 
-  * [Download this starter compass project and unzip it](https://github.com/zurb/foundation-compass-template/archive/master.zip)
-  * Run `bower install` to install the latest version of Foundation
-  
-Then when you're working on your project, just run the following command:
+The main purpose is to show the current temperature in a contex base. A given temperature may seem hot but for a determined region, may be normal. For example, someone from Miami may find 80 degrees reasonable for a summer afternoon.
 
-```bash
-bundle exec compass watch
-```
+Once determined the current temperature in historical context, a humurous message is chosen randomly from a group of 10 possible situations, and displayed.
 
-## Upgrading
 
-If you'd like to upgrade to a newer version of Foundation down the road just run:
-
-```bash
-bower update
-```
-# fweather

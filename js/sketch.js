@@ -33,26 +33,29 @@ var oGauge = function( p ) {
 
     p.background(oBgColor);
     p.image(img, 0, 0);
-    p.stroke("#5b5b5b");
+    p.stroke(textColorHex);
     p.translate(60,56);
     p.angleMode(p.DEGREES);
+    
     p.push();
+        p.stroke(textColorHex);
         p.rotate(minangle);
         p.line(0,-38,0,-43); 
         p.rotate(maxangle);
         p.line(0,-38,0,-43); 
     p.pop();
-      if (cangle < angle) {
+    
+    if (cangle < angle) {
         p.rotate(cangle);
         //p.line(0,-6,0,-40);
-        p.fill(oBgColor);
+        p.stroke(textColorHex);
         p.triangle(-6,1,-6,-1,-40,0)
         cangle = cangle + 1;
 
       } else {
 
         p.rotate(angle);
-        p.fill(oBgColor);
+        p.fill(textColorHex);
         p.triangle(-6,1,-6,-1,-40,0)
         //p.line(0,-6,0,-40);
 
@@ -79,6 +82,10 @@ var oCondition = function( p ) {
   p.draw = function() {
     p.background(oBgColor);
     p.image(img, 0, 0);
+    p.fill(textColorHex);
+    p.textSize(16);
+    p.strokeWeight(0);
+    p.text(p.int(currTemp)+" F",42,40);
 
     
   };
