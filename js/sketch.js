@@ -84,8 +84,8 @@ var oCondition = function( p ) {
     p.image(img, 0, 0);
     p.fill(textColorHex);
     p.textSize(16);
-    p.strokeWeight(0);
-    p.text(p.int(currTemp)+" F",42,40);
+
+    p.text(p.int(currTemp)+" F",43,36);
 
     
   };
