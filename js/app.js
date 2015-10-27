@@ -48,6 +48,7 @@ function DoZipStuff(BadZip) {
 	var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip); 
 	
 	if (isValidZip && !BadZip) {
+		$('.errormsg').html("");
 		console.log("I like this ZIP - "+zip)
 		GetWeather();
 		GetHistory();
