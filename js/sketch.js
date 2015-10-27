@@ -71,7 +71,7 @@ var oGauge = function( p ) {
 
 
 /// Controls the weather condition canvas  ///
-
+// todo: make rain animation
 
 var oCondition = function( p ) {
 
@@ -90,7 +90,7 @@ var oCondition = function( p ) {
     p.fill(textColorHex);
     p.textSize(16);
 
-    p.text(currTemp+" F",40,36);
+    p.text(p.int(currTemp)+" F",43,36);
 
     
   };

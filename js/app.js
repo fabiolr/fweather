@@ -2,7 +2,6 @@
 // I mean, based on how it is now and how it has been this month in the last 30 years...
 // code by @fabiolr - feel free to copy & credit!
 
-
 $(document).foundation();
 var currTemp;
 var historicalLowMin;
@@ -31,70 +30,58 @@ var currentWeather;
 var weatherID; // cloud cover and rain info saved here
 var textColor;
 var textColorHex;
-var yiq;
+var yiq; // helps determine contrast bg/text 
 var ErrorMsg;
+var JustTold;
 
 // loads [hopefully] funny messages 
 LoadMessages();
 
 
-// checks for zip in cookies
-
+// checks for zip in cookies, and do the zip thing
 zip = document.cookie.replace(/(?:(?:^|.*;\s*)zip\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 DoZipStuff();
 
-
 function DoZipStuff(BadZip) {
 
-	var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip); // test ZIPs number consistency, but API might still not like it
-
-
+		// test ZIPs number consistency, but API might still not like it
+	var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip); 
+	
 	if (isValidZip && !BadZip) {
-
 		console.log("I like this ZIP - "+zip)
 		GetWeather();
 		GetHistory();
-
 	} else {
-
 		console.log("No Valid Zip or Cookie Found");
 		ErrorMsg = "Sorry, but I don't like ZIP "+zip;
-	// hide everything and request zip
-		$('#myModal').foundation('reveal', 'open');
+	
+	// let's try to get the user to put another zip
 		$('.errormsg').html(ErrorMsg);
 		$("body").fadeIn(1200);
-
+		$('#myModal').foundation('reveal', 'open');
 	}
-
 }
 
-  $( document ).ready(function() {
-  		// do here whatever u want to the dom
- 		console.log("In case you are interested, the DOM is now ready for manipulation")
+
+$( document ).ready(function() {
+// sometime I use this to make sure the DOM is ready before trying something funny
+console.log("In case you are interested, the DOM is now ready fully loaded")
   });
 
-// Changes ZIP on click of change button, sets cookie and calls to change stuff
-
 $("#ChangeZip").click(function(){
-
+// Changes ZIP on click of button, sets cookie and calls the zip magic 
     	zip = $('#zip').val();
     	$('#myModal').foundation('reveal', 'close');
  		ClearDom();
     	DoZipStuff();
  		document.cookie = "zip="+zip;
-
 });
 
-// Gets Funny messages
-
 function LoadMessages() {
-
-
+// Gets Funny messages
 $.getJSON("data/funny.json")
-
 	.done(function(data) {
 		 oMessages = data;
-
 	});
 }
 
@@ -123,10 +110,9 @@ $.getJSON("data/funny.json")
   	aPossibleMessages = getMessages(id,oMessages);
   	return aPossibleMessages[Math.floor((Math.random() * aPossibleMessages.length))];
         console.log("Oh, PickOneMessage just ran");
-
   }
 
-// CHOSES and PRINTES messages
+// CHOOSES and PRINTES messages
 
 function DoMsgLogic() {
 
@@ -221,17 +207,20 @@ console.log("Message selected randomly for case #" + currentCase);
 
 }
 
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
 /////////////////////////////////
 ///  ICON   SELECTION   LOGIC ///
 /////////////////////////////////
 
+function DoIconLogic() {
 
 
+	if (weatherID >= 200 && weatherID <= 531) {currentWeather = "rain.svg"}
+	if (weatherID >= 600 && weatherID <= 622) {currentWeather = "snow.svg"}
+	if (weatherID >= 801 && weatherID <= 804) {currentWeather = "cloud.svg"}
+	if (weatherID >= 900) {currentWeather = "warning.svg"}
+	if (weatherID == 800) {currentWeather = "sun.svg"}
 
-
+}
 
 /////////////////////////////////////////////////
 ///  HISTORICAL DATA API CALLS AND HANDLING   ///
@@ -265,7 +254,13 @@ function GetHistory() {
 
 			console.log("Oh no, WU API did not like that ZIP that looked fine")
 		 	// apparently the API didn't like that ZIP
-			 DoZipStuff(1);
+
+				if (JustTold) {JustTold = false} 
+		 		else {
+		 			DoZipStuff(1);
+		 			JustTold = true
+		 		}
+
 			}
 
 	 	})
@@ -295,7 +290,10 @@ $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip="+zip+",us&APPID=6
 
 		 	console.log("Oh no, OW API did not like that ZIP that looked fine")
 
-			DoZipStuff(1);
+		 	if (JustTold) {JustTold = false} 
+		 	else {DoZipStuff(1);
+		 		JustTold = true
+		 	}
 
 		 } else { 
 
@@ -306,17 +304,6 @@ $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip="+zip+",us&APPID=6
 
 }
 
-
-function DoIconLogic() {
-
-
-	if (weatherID >= 200 && weatherID <= 531) {currentWeather = "rain.svg"}
-	if (weatherID >= 600 && weatherID <= 622) {currentWeather = "snow.svg"}
-	if (weatherID >= 801 && weatherID <= 804) {currentWeather = "cloud.svg"}
-	if (weatherID >= 900) {currentWeather = "warning.svg"}
-	if (weatherID == 800) {currentWeather = "sun.svg"}
-
-}
 
 /////////////////////////////////////////
 ///  DOM MANIPULATION FUNCTIONS      ///
@@ -363,7 +350,7 @@ function PutInContext() {
 	// update city name on gui
 	weatherID = oWeather.weather[0].id;
 	currTemp = Math.round(oWeather.main.temp * 10) / 10;
-	console.log("PutInContext: The City OpenWeather got for this ZIP is " + oWeather.name + " - Yeah, I know, may be weird..");
+	console.log("PutInContext: The city OpenWeather got for this ZIP is " + oWeather.name + " - Yeah, may be weird..");
 	tempRange = historicalHighMax - historicalLowMin;
 	tempFactor = (currTemp - historicalLowMin) / tempRange;
 	minFactor = (historicalLowAvg - historicalLowMin) / tempRange;
@@ -371,25 +358,18 @@ function PutInContext() {
 
 }
 
+/// When everything is good, time to do the magic..
 
 function LetsGo() {
 
 	console.log("OK, I got all I need, LetsGo!");
-
-
-
-	goodToGo = 0;
+	goodToGo = 0; // resets it for next time...
 	PutInContext();
 	DoMsgLogic();
 	DoIconLogic();
 	DoCanvases();
 	FillDom();
 
-	console.log("LetsGo: I'm done for now");
+	console.log("I'm done for now");
 
 }
-
-
-	
-
-
