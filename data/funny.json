@@ -1,7 +1,7 @@
 [{
-    "caseID": 2,
+    "caseID": 9,
     "bigMsg": "Turn on the A/C before you have sex",
-    "smallMsg": "Once you are on out there, there is no turning back"
+    "smallMsg": "Once you are out there, there is no turning back"
 },{
     "caseID": 9,
     "bigMsg": "No way you won't sweat today",
@@ -22,6 +22,10 @@
     "caseID": 1,
     "bigMsg": "Go back to your igloo",
     "smallMsg": "even if you are an esquimo"
+},{
+    "caseID": 3,
+    "bigMsg": "It's kinda chilly",
+    "smallMsg": "but not really"
 },{
     "caseID": 9,
     "bigMsg": "It's fucking hot",

@@ -39,15 +39,22 @@ var oGauge = function( p ) {
     
     p.push();
         p.stroke(textColorHex);
+        p.textSize(7);
+
         p.rotate(minangle);
+
+        //p.text(p.int(historicalLowAvg),-30,0);
+      //  p.text(p.int(historicalLowAvg),-30,0);
+
         p.line(0,-38,0,-43); 
         p.rotate(maxangle);
+        //p.text(p.int(historicalHighAvg),-30,0);
+
         p.line(0,-38,0,-43); 
     p.pop();
     
     if (cangle < angle) {
         p.rotate(cangle);
-        //p.line(0,-6,0,-40);
         p.stroke(textColorHex);
         p.triangle(-6,1,-6,-1,-40,0)
         cangle = cangle + 1;
@@ -56,9 +63,7 @@ var oGauge = function( p ) {
 
         p.rotate(angle);
         p.fill(textColorHex);
-        p.triangle(-6,1,-6,-1,-40,0)
-        //p.line(0,-6,0,-40);
-
+        p.triangle(-6,1,-6,-1,-40,0);
       }
 
   };
@@ -85,7 +90,7 @@ var oCondition = function( p ) {
     p.fill(textColorHex);
     p.textSize(16);
 
-    p.text(p.int(currTemp)+" F",43,36);
+    p.text(currTemp+" F",40,36);
 
     
   };

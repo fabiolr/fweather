@@ -14,7 +14,21 @@ body {
 
 }
 
+.errormsg {
+	
+	color:red;
+}
 
+.famod {
+
+	background-color:  rgba(255,255,255,.5);
+}
+
+.bottoms {
+
+	height: 40%;
+
+}
 
 .weather-col {
 
@@ -54,11 +68,6 @@ a:visited  {
 		font-size: 2vh;
 		text-align: center;
 		color: #5b5b5b;
-
-}
-
-.locset {
-		padding-right: 60px;
 
 }
 
@@ -104,8 +113,6 @@ figure {
 
 .funny-message-w {
 		padding-top: 20px;
-		/*min-height: 300px;*/
-		/*height: 70%;*/
 
 }
 
@@ -125,6 +132,8 @@ figure {
 .gauges {
 
 	vertical-align: text-bottom;
+	height: 230px;
+
 }
 
 // Or selectively include components

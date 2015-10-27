@@ -32,8 +32,7 @@ var weatherID; // cloud cover and rain info saved here
 var textColor;
 var textColorHex;
 var yiq;
-
-
+var ErrorMsg;
 
 // loads [hopefully] funny messages 
 LoadMessages();
@@ -42,44 +41,47 @@ LoadMessages();
 // checks for zip in cookies
 
 zip = document.cookie.replace(/(?:(?:^|.*;\s*)zip\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+DoZipStuff();
 
-if (zip) {
 
-	zip = Number(zip);
-	GetWeather();
-	GetHistory();
+function DoZipStuff(BadZip) {
 
-} else {
+	var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip); // test ZIPs number consistency, but API might still not like it
 
-	console.log("No Cookie Found");
+
+	if (isValidZip && !BadZip) {
+
+		console.log("I like this ZIP - "+zip)
+		GetWeather();
+		GetHistory();
+
+	} else {
+
+		console.log("No Valid Zip or Cookie Found");
+		ErrorMsg = "Sorry, but I don't like ZIP "+zip;
 	// hide everything and request zip
-	$('#myModal').foundation('reveal', 'open');
-	$("body").fadeIn(1200	);
+		$('#myModal').foundation('reveal', 'open');
+		$('.errormsg').html(ErrorMsg);
+		$("body").fadeIn(1200);
 
+	}
 
 }
- 	
+
   $( document ).ready(function() {
-
   		// do here whatever u want to the dom
-
  		console.log("In case you are interested, the DOM is now ready for manipulation")
-
-
   });
-
-
 
 // Changes ZIP on click of change button, sets cookie and calls to change stuff
 
 $("#ChangeZip").click(function(){
 
     	zip = $('#zip').val();
- 		document.cookie = "zip="+zip;
+    	$('#myModal').foundation('reveal', 'close');
  		ClearDom();
-		$('#myModal').foundation('reveal', 'close');
-    	GetWeather();
-		GetHistory();
+    	DoZipStuff();
+ 		document.cookie = "zip="+zip;
 
 });
 
@@ -179,7 +181,7 @@ function DoMsgLogic() {
 
 		} else  {		// Run this during the rest of the day
 
-		 	console.log("At this time of the day I'll use LOW hostorical temps to do decide the message");
+		 	console.log("At this time of the day I'll use LOW historical temps to do decide the message");
 
 			if (currTemp >= (historicalLowAvg * (1 - withinAvg)) && currTemp <= (historicalLowAvg * (1 + withinAvg))) {
 
@@ -244,16 +246,27 @@ function GetHistory() {
 			.done(function(data) {
 			oHistory = data;
 
-			console.log("GetHistory: requested data from " + oHistory.trip.airport_code + " for month " + m + " and they replied " + oHistory.trip.title);
-				
-			historicalLowMin = oHistory.trip.temp_low.min.F;
-			historicalLowAvg = oHistory.trip.temp_low.avg.F;
-			historicalLowMax = oHistory.trip.temp_low.max.F;
-			historicalHighMin = oHistory.trip.temp_high.min.F;
-			historicalHighAvg = oHistory.trip.temp_high.avg.F;
-			historicalHighMax = oHistory.trip.temp_high.max.F;
+			if (!oHistory.response.error) {
 
-			if (goodToGo) {LetsGo()} else {goodToGo = true};  // runs LetsGo only if other APIs have also done their jobs
+				console.log("GetHistory: requested data from " + oHistory.trip.airport_code + " for month " + m + " and they replied " + oHistory.trip.title);
+				
+				historicalLowMin = oHistory.trip.temp_low.min.F;
+				historicalLowAvg = oHistory.trip.temp_low.avg.F;
+				historicalLowMax = oHistory.trip.temp_low.max.F;
+				historicalHighMin = oHistory.trip.temp_high.min.F;
+				historicalHighAvg = oHistory.trip.temp_high.avg.F;
+				historicalHighMax = oHistory.trip.temp_high.max.F;
+
+				if (goodToGo) {LetsGo()} else {goodToGo = true};  // runs LetsGo only if other APIs have also done their jobs
+
+				}
+
+			else { 
+
+			console.log("Oh no, WU API did not like that ZIP that looked fine")
+		 	// apparently the API didn't like that ZIP
+			 DoZipStuff(1);
+			}
 
 	 	})
 
@@ -277,21 +290,18 @@ $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip="+zip+",us&APPID=6
 	.done(function(data) {
 		console.log("GetWeather: Current weather loaded just fine")
 		 oWeather = data;
-		 weatherID = oWeather.weather[0].id;
 
-		 // if (oWeather.cod == 404) {
+		 if (oWeather.cod == "404") {
 
-		 // 	document.cookie = "zip=";
-			// ClearDom();
-			// $('#myModal').foundation('reveal', 'open');
-			// $("body").fadeIn(1200);
-		 // 	console.log("Error 404 on OpenWeather");
+		 	console.log("Oh no, OW API did not like that ZIP that looked fine")
 
-		// } else { 
+			DoZipStuff(1);
+
+		 } else { 
 
 		if (goodToGo) {LetsGo()} else {goodToGo = true};   // runs LetsGo only if other APIs have also done their jobs
 
-	// }
+		 }
 	});
 
 }
@@ -351,7 +361,8 @@ function PutInContext() {
 	// get temperature and put into context
 
 	// update city name on gui
-	currTemp = oWeather.main.temp;
+	weatherID = oWeather.weather[0].id;
+	currTemp = Math.round(oWeather.main.temp * 10) / 10;
 	console.log("PutInContext: The City OpenWeather got for this ZIP is " + oWeather.name + " - Yeah, I know, may be weird..");
 	tempRange = historicalHighMax - historicalLowMin;
 	tempFactor = (currTemp - historicalLowMin) / tempRange;

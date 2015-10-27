@@ -55,7 +55,7 @@
     </div>
 </div>
 
-<div class="row messages">
+<div class="row bottoms">
 
         <div class="small-6 medium-6 large-12 columns">
 
@@ -64,10 +64,10 @@
 
         </div>
 
-        <div class="small-6 medium-6 large-12 columns locset">
+        <div class="small-6 medium-6 large-12 columns">
 
       <!--Location  Icon -->
-      <a id="settings" href="#" data-reveal-id="myModal"><img id="locicon" alt="Chg Zip" class="location_icon"><p class="status-settings" id="CurrentCity" class="status-settings">
+      <a id="settings" href="#" data-reveal-id="myModal"><img id="locicon" alt="Chg Zip" class="location_icon"></a><p class="status-settings" id="CurrentCity" class="status-settings"></p>
         </div>
 
 </div>
@@ -76,11 +76,12 @@
 
 <!-- popup modal for settings -->
 
-<div id="myModal" class="reveal-modal tiny" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">Use your ZIP to get the stuff that matters to you.</h2>
+<div id="myModal" class="reveal-modal tiny famod" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h3 id="modalTitle">Where are you?</h3>
   <p><input id="zip" type="text" placeholder="ZIP Code"></p>
   <a href="#" id="ChangeZip" class="alert button expand">Change</a>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  <p class="errormsg"></p>
 </div>
 
 
